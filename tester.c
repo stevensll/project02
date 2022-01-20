@@ -9,7 +9,6 @@ int main(int argc, char** argv){
         printf("Error: SDL failed to initialize\nSDL Error: '%s'\n", SDL_GetError());
         return 1;
     }
-
     SDL_Window *window = SDL_CreateWindow("SLD test", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
     if(!window){
         printf("Error: Failed to open window\nSDL Error: '%s'\n", SDL_GetError());
@@ -38,7 +37,6 @@ int main(int argc, char** argv){
 
         SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
         SDL_RenderClear(renderer);
-
         SDL_RenderPresent(renderer);
     }
 
