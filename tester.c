@@ -1,44 +1,29 @@
-#include <SDL2/SDL.h>
 #include <stdio.h>
+#include <stdlib.h>
+
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
 
 #define SCREEN_WIDTH 1280 
 #define SCREEN_HEIGHT 720
 
 int main(int argc, char** argv){
-    if(SDL_Init(SDL_INIT_VIDEO) < 0){
-        printf("Error: SDL failed to initialize\nSDL Error: '%s'\n", SDL_GetError());
-        return 1;
-    }
-    SDL_Window *window = SDL_CreateWindow("SLD test", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
-    if(!window){
-        printf("Error: Failed to open window\nSDL Error: '%s'\n", SDL_GetError());
-        return 1;
+    int result = 0;
+    if(SDL_Init(SDL_INIT_AUDIO)){
+        printf("SDL could not be initialized");
     }
 
-    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-    if(!renderer){
-        printf("Error: Failed to create renderer\nSDL Error: '%s'\n", SDL_GetError());
-        return 1;
+    if(MIX_INIT_MP3 != (result = MixInit(MIX_INIT_MP3)){
+        printf("Could not initialize mixer");
     }
-
-    int running = 1;
-    while(running){
-        SDL_Event event;
-        while(SDL_PollEvent(&event)){
-            switch(event.type){
-                case SDL_QUIT:
-                    running = 0;
-                    break;
-
-                default:
-                    break;
-            }
-        }
-
-        SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
-        SDL_RenderClear(renderer);
-        SDL_RenderPresent(renderer);
+    Mix_OpenAudio(22050, AUDIO_S16SYS, 2,640);
+    Mix_Music *music = Mix_LoadMUS("Refelection.mp3");
+    Mix_PlayMusic(music, 1);
+    while (!SDL_QuitRequested()){
+        SDL_Delay(250);
     }
+    Mix_FreeMusic (music);
+    SDL_Quit();
 
     return 0;
 }
