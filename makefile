@@ -1,2 +1,2 @@
 all:
-	gcc tester.c -Isrc/include -Lsrc/lib -Wall -lmingw32 -lSDL2main -lSDL2 -o tester
+	gcc -Isrc/include -Lsrc/lib -o tester tester.c -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer
