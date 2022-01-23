@@ -24,7 +24,7 @@ struct song * create_song(char *file_name); //creates a song and adds its name, 
 
 void print_data(struct song *s); //prints out all the data contained within the song struct
 
-char * file_name_to_name(char * file_name); //converts file name to song name by cutting off the ".mp3"
+//char * file_name_to_name(char * file_name); //converts file name to song name by cutting off the ".mp3"
 
 void change_name(struct song *s, char * name); 
 

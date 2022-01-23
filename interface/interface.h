@@ -1,18 +1,20 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <ctype.h>
-#include <errno.h>
-#include <sys/types.h>
-#include <sys/stat.h>
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <string.h>
+// #include <time.h>
+// #include <unistd.h>
+// #include <fcntl.h>
+// #include <ctype.h>
+// #include <errno.h>
+// #include <sys/types.h>
+// #include <sys/stat.h>
+#include "playlist.h"
 
 //setup function (sets up queue, master playlist)
 struct playlist ** setup() {
     printf("Welcome to SPotify!\nPlease type 'man' for list of commands.");
     struct playlist ** master = create_master_list();
+    //look at all mp3s in the directory and add to master list
     return master;
 }
 
@@ -25,10 +27,10 @@ char * get_input() {
 }
 
 //run command
-void run_cmd(char * cmd);
+// void run_cmd(char * cmd);
 
 //separates cmd line input to readable form
-char ** str_sep(char * cmd);
+// char ** str_sep(char * cmd);
 
 //functions for all the commands
 

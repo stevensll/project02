@@ -10,6 +10,7 @@
 #include <sys/stat.h>
 #define MAX_PLAYLIST_NUM 50
 #define MAX_SONG_NUM 100
+#include "song.h"
 
 struct playlist {
     char name[STRING_SIZE]; //actual name of playlist, ex. "train vibes"
@@ -23,8 +24,14 @@ struct playlist ** create_master_list();
 //create playlist 
 struct playlist * create_playlist(char *playlist_name);
 
+//returns number of songs in a playlist
+int playlist_size(struct playlist * p);
+
 //add playlist to master list
 void register_playlist(struct playlist * list, struct playlist ** master);
+
+//add song to master playlist
+void register_song(struct song * s, struct playlist ** master);
 
 //deletes playlist and removes from master playlist list
 void delete_playlist(struct playlist * list, struct playlist ** master);
@@ -43,6 +50,18 @@ void disp_all_playlists(struct playlist ** master);
 
 //display queue data
 void disp_queue(struct playlist ** master);
+
+//display all songs
+void disp_all_songs(struct playlist ** master);
+
+//adds song to queue
+void queue_song(struct song * s, struct playlist ** master);
+
+void dequeue_song(struct song * s, struct playlist ** master);
+
+void queue_playlist(struct playlist * p, struct playlist ** master);
+
+void clear_queue(struct playlist ** master);
 
 //sorting through list[1] to make new playlist based on diff data, ex: last played, file size, artist, song name
 
