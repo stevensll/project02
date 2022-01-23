@@ -63,32 +63,32 @@ int run_cmd(char ** cmd, struct, playlist ** master) {
     }
     else if (!strcmp(cmd[0], "song_info")) {
         //find song struct s from song name
-        struct song * s = get_song(cmd[1]);
-        print_data(s);
+        int s = get_song(cmd[1]);
+        print_data(((master[1])->list)[s]);
     }
     else if (!strcmp(cmd[0], "playlist_info")) {
         //find playlist struct p from name
-        struct playlist * p = get_playlist(cmd[1]);
-        disp_playlist_data(p);
+        int p = get_playlist(cmd[1]);
+        disp_playlist_data(master[p]);
     }
     else if (!strcmp(cmd[0], "add_song")) {
         //find playlist struct p from cmd[2]
         //find song struct s from cmd[1]
-        struct song * s = get_song(cmd[1]);
-        struct playlist * p = get_playlist(cmd[2]);
-        add_song(s, p);
+        int s = get_song(cmd[1]);
+        int p = get_playlist(cmd[2]);
+        add_song(((master[1])->list)[s], master[p]);
     }
     else if (!strcmp(cmd[0], "delete_song")) {
         //find playlist struct p from cmd[2]
         //find song struct s from cmd[1]
-        struct song * s = get_song(cmd[1]);
-        struct playlist * p = get_playlist(cmd[2]);
-        delete_song(s, p);
+        int s = get_song(cmd[1]);
+        int p = get_playlist(cmd[2]);
+        delete_song(((master[1])->list)[s], master[p]);
     }
     else if (!strcmp(cmd[0], "delete_playlist")) {
         //find playlist struct p from cmd[1]
-        struct playlist * p = get_playlist(cmd[1]);
-        delete_playlist(p, master);
+        int p = get_playlist(cmd[1]);
+        delete_playlist(master[p], master);
     }
     else if (!strcmp(cmd[0], "create_playlist")) {
         struct * playlist p = create_playlist(cmd[1]);
@@ -96,33 +96,33 @@ int run_cmd(char ** cmd, struct, playlist ** master) {
     }
     else if (!strcmp(cmd[0], "song_name")) {
         //find song struct s from cmd[1]
-        struct song * s = get_song(cmd[1]);
-        change_name(s, cmd[2]);
+        int s = get_song(cmd[1]);
+        change_name(((master[1])->list)[s], cmd[2]);
     }
     else if (!strcmp(cmd[0], "song_artist")) {
         //find song struct s from cmd[1]
-        struct song * s = get_song(cmd[1]);
-        change_artist(s, cmd[2]);
+        int s = get_song(cmd[1]);
+        change_artist(((master[1])->list)[s], cmd[2]);
     }
     else if (!strcmp(cmd[0], "song_genre")) {
         //find song struct s from cmd[1]
-        struct song * s = get_song(cmd[1]);
-        change_genre(s, cmd[2]);
+        int s = get_song(cmd[1]);
+        change_genre(((master[1])->list)[s], cmd[2]);
     }
     else if (!strcmp(cmd[0], "queue_list")) {
         //find playlist struct p from cmd[1]
-        struct playlist * p = get_playlist(cmd[1]);
-        queue_playlist(p, master);
+        int p = get_playlist(cmd[1]);
+        queue_playlist(master[p], master);
     }
     else if (!strcmp(cmd[0], "queue_song")) {
         //find song struct s from cmd[1]
-        struct song * s = get_song(cmd[1]);
-        queue_song(s, master);
+        int s = get_song(cmd[1]);
+        queue_song(((master[1])->list)[s], master);
     }
     else if (!strcmp(cmd[0], "dequeue_song")) {
         //find song struct s from cmd[1]
-        struct song * s = get_song(cmd[1]);
-        dequeue_song(s, master);
+        int s = get_song(cmd[1]);
+        dequeue_song(((master[1])->list)[s], master);
     }
     else if (!strcmp(cmd[0], "queue")) {
         disp_queue(master);

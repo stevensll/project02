@@ -160,31 +160,31 @@ void clear_queue(struct playlist ** master) {
 }
 
 //get song struct from song name
-struct song * get_song(char * name, struct ** playlist master) {
+int get_song(char * name, struct ** playlist master) {
     struct song * s;
     int i;
     for (i = 0; i < MAX_SONG_NUM; i++) {
         if (((master[1])->list)[i]) {
             if (!strcmp(((master[1])->list)[i]->name, name)) {
-                s = ((master[1])->list)[i]
-                break;
+                return i;
             }
         }
     }
+    return -1;
 }
 
 //get playlist struct from playlist name
-struct playlist * get_playlist(char * name, struct ** playlist master) {
+int get_playlist(char * name, struct ** playlist master) {
     struct * playlist p;
     int i;
     for (i = 2; i < MAX_PLAYLIST_NUM + 2; i++) {
         if (master[i]) {
             if (!strcmp(master[i]->name, name)) {
-                p = master[i];
-                break;
+                return i;
             }
         }
     }
+    return -1;
 }
 
 //sorting through list[1] to make new playlist based on diff data, ex: last played, file size, artist, song name
