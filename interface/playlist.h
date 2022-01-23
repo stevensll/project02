@@ -1,13 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <ctype.h>
-#include <errno.h>
-#include <sys/types.h>
-#include <sys/stat.h>
 #define MAX_PLAYLIST_NUM 50
 #define MAX_SONG_NUM 100
 #include "song.h"

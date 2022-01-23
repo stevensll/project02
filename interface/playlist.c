@@ -65,7 +65,7 @@ void add_song(struct song * s, struct playlist * p) {
     for (i = 0; i < MAX_SONG_NUM; i++) {
         if (!(p->list)[i]) {
             (p->list)[i] = s;
-            printf("added %s to %s sub %d\n", s->name, p->name, i);
+            //printf("added %s to %s sub %d\n", s->name, p->name, i);
             break;
         }
     }

@@ -1,30 +1,14 @@
-// #include <stdio.h>
-// #include <stdlib.h>
-// #include <string.h>
-// #include <time.h>
-// #include <unistd.h>
-// #include <fcntl.h>
-// #include <ctype.h>
-// #include <errno.h>
-// #include <sys/types.h>
-// #include <sys/stat.h>
 #include "playlist.h"
+#include <dirent.h>
 
 //setup function (sets up queue, master playlist)
-struct playlist ** setup() {
-    printf("Welcome to SPotify!\nPlease type 'man' for list of commands.");
-    struct playlist ** master = create_master_list();
-    //look at all mp3s in the directory and add to master list
-    return master;
-}
+struct playlist ** setup();
+
+//add mp3 miles in current directory to master playlist
+void get_songs_from_dir(char * path, struct playlist ** master);
 
 //ask for input from command line and return command
-char * get_input() {
-    printf("# ");
-    char input[STRING_SIZE];
-    fgets(input, sizeof(input), stdin);
-    return input;
-}
+// char * get_input();
 
 //run command
 // void run_cmd(char * cmd);
