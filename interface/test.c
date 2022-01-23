@@ -53,11 +53,18 @@ int main() {
     disp_queue(master);
     */
 
+    //setup
     struct playlist ** master = setup();
-    
-    while (1) {
+    disp_help_page();
+
+    int running = 1;
+    while (running) {
+        
         //get input
+
         //run command
+        running = run_cmd(input);
+        
     }
 
     return 0;
