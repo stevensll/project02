@@ -26,22 +26,16 @@ int main(int argc, char** argv){
         printf("Mix_LoadUMS: %s\n", Mix_GetError());
         return -1;
     }
-    SDL_Window * window = SDL_CreateWindow("Hello, SDL2", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
-    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-    SDL_SetRenderDrawColor(renderer, 255, 0, 0,255);
-    Mix_PlayMusic(music, -1);
+    
+    int i = Mix_PlayMusic(music, 1);
+    Mix_SetMusicPosition(100);
+    
+
+
+
     int running = 1;
-    while(running){
-        // Clear screen
-        SDL_RenderClear(renderer);
 
-        // Draw
-
-        // Show what was drawn
-        SDL_RenderPresent(renderer);
-    }
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
+    Mix_HaltMusic();
     Mix_FreeMusic(music);
     Mix_CloseAudio();
     SDL_Quit();
