@@ -19,7 +19,7 @@ struct playlist * create_playlist(char *playlist_name) {
 //add playlist to master playlist list
 void register_playlist(struct playlist * list, struct playlist ** master) {
     int i = 2;
-    while (!master[i]) {
+    while (master[i]) {
         i++;
     }
     master[i] = list;

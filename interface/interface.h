@@ -10,12 +10,29 @@
 #include <sys/stat.h>
 
 //setup function (sets up queue, master playlist)
-
-//writing/reading import functions (will save the list of playlists)
+struct playlist ** setup() {
+    printf("Welcome to SPotify!\nPlease type 'man' for list of commands.");
+    struct playlist ** master = create_master_list();
+    return master;
+}
 
 //ask for input from command line and return command
+char * get_input() {
+    printf("# ");
+    char input[STRING_SIZE];
+    fgets(input, sizeof(input), stdin);
+    return input;
+}
+
+//run command
+void run_cmd(char * cmd);
+
+//separates cmd line input to readable form
+char ** str_sep(char * cmd);
 
 //functions for all the commands
 
 //display man page (all the commands needed)
+
+//writing/reading import functions (will save the list of playlists)
 
