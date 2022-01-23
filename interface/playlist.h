@@ -47,11 +47,20 @@ void disp_all_songs(struct playlist ** master);
 //adds song to queue
 void queue_song(struct song * s, struct playlist ** master);
 
+//remmoves song from queue
 void dequeue_song(struct song * s, struct playlist ** master);
 
+//clears queue and queues playlist
 void queue_playlist(struct playlist * p, struct playlist ** master);
 
+//clears queue
 void clear_queue(struct playlist ** master);
+
+//get song struct from song name
+struct song * get_song(char * name, struct ** playlist master);
+
+//get playlist struct from playlist name
+struct playlist * get_playlist(char * name, struct ** playlist master);
 
 //sorting through list[1] to make new playlist based on diff data, ex: last played, file size, artist, song name
 

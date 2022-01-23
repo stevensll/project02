@@ -11,14 +11,10 @@ void get_songs_from_dir(char * path, struct playlist ** master);
 // char * get_input();
 
 //run command
-// void run_cmd(char * cmd);
-
-//separates cmd line input to readable form
-// char ** str_sep(char * cmd);
-
-//functions for all the commands
+void run_cmd(char ** cmd, struct, playlist ** master);
 
 //display man page (all the commands needed)
+void disp_help_page();
 
 //writing/reading import functions (will save the list of playlists)
 
