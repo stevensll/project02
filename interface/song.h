@@ -35,3 +35,5 @@ void change_genre(struct song *s, char * genre);
 void change_pub_year(struct song *s, int yr); 
 
 void update_atime(struct song *s); //updates when the song was last accessed
+
+//delete song, use free

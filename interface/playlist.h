@@ -8,26 +8,41 @@
 #include <errno.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#define MAX_PLAYLIST_NUM 50
+#define MAX_SONG_NUM 100
 
-//maybe make a playlist into a struct, with first element be the name and the second one be the actual list?
+struct playlist {
+    char name[STRING_SIZE]; //actual name of playlist, ex. "train vibes"
+    struct song ** list; //list of songs
+    int num_songs; //number of songs in the playlist
+};
 
-//create playlist and add to playlist list
+//creates master playlist (queue will be list[0], master playlist of songs will be list[1])
+struct playlist ** create_master_list();
 
-//delete playlist
+//create playlist 
+struct playlist * create_playlist(char *playlist_name);
 
-//create list of playlists (queue will be list[0], master playlist of songs will be list[1])
+//add playlist to master list
+void register_playlist(struct playlist * list, struct playlist ** master);
+
+//deletes playlist and removes from master playlist list
+void delete_playlist(struct playlist * list, struct playlist ** master);
 
 //add songs to playlist
+void add_song(struct song * s, struct playlist * p);
 
 //delete songs from playlist
+void delete_song(struct song *s, struct playlist * p);
 
-//sorting through list[1] to make new playlist based on diff data
+//display playlist data 
+void disp_playlist_data(struct playlist * p);
 
-//display playlist data
+//display name of all playlists
+void disp_all_playlists(struct playlist ** master); 
 
-//display all playlists
+//display queue data
+void disp_queue(struct playlist ** master);
 
-//display queue
-
-
+//sorting through list[1] to make new playlist based on diff data, ex: last played, file size, artist, song name
 
