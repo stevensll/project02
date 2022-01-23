@@ -28,13 +28,16 @@ int main(int argc, char* argv[]){
     }
     
     int i = Mix_PlayMusic(music, 1);
-    Mix_SetMusicPosition(100);
+    Mix_VolumeMusic(0.5 * MIX_MAX_VOLUME);
+    // Mix_SetMusicPosition(100);
     
 
-
+    
 
     int running = 1;
-
+    while(running){
+        if(!Mix_PlayingMusic()) return 1;
+    }
     Mix_HaltMusic();
     Mix_FreeMusic(music);
     Mix_CloseAudio();

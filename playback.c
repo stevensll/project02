@@ -14,25 +14,23 @@
 #define MAX_INPUT_SIZE 500
 
 
-//Retrieves an argument from a command input
-char ** get_cmd_args(char * cmd){
-    //deletes newline at the end of the input
-    char *pos;
-    if ((pos=strchr(cmd, '\n')) != NULL) *pos = '\0';
-    
-    char ** args = calloc(sizeof(cmd)/sizeof(char), sizeof(char *));
+/*  
+    Process the command and get an argument, if given. Returns an arraylist where line[0] = command and line[1] = argument
+*/
+char ** get_cmd(char * cmd){
+    //get rid of the newline
+    char *temp;
+    if ((temp=strchr(cmd, '\n')) !=NULL) *temp ='\0';
+
+    char ** line = calloc(sizeof(cmd)/sizeof(char), sizeof(char *));
     char * curr = cmd;
     int i = 0;
-    while (curr){
-        // the first arg will be the cmd
-        args[i] = strsep(&curr, " ");
+    while(curr && i < 2){
+        line[i] = strsep(&curr, " ");
         i++;
-        if(i > 1){
-            break;
-        }
     }
-    args[i] = NULL;
-    return args;
+    line[i] = NULL;
+    return line;
 }
 
 void print_string_arr(char ** arr){
@@ -45,8 +43,6 @@ void print_string_arr(char ** arr){
 }
 int main(int argc, char* argv[]){
 
-
-    
     // print_string_arr(cmd);
     // printf("%s", cmd[0]);
     int running = 1;
@@ -54,9 +50,11 @@ int main(int argc, char* argv[]){
     while(1){
         char input[MAX_INPUT_SIZE];
         fgets(input, sizeof(input), stdin);
-        char ** cmd = get_cmd_args(input);
-        while(cmd[0]){
-            if (!strcmp(cmd[0], "pause")){
+        char ** cmd = get_cmd(input);
+        int i = 0;
+        char ** in = cmd[i];
+        while(in){
+            if (!strcmp(in, "pause")){
                 printf("Got pause!\n");
             }
             // else if (!strcmp(cmd[0], "resume")){
@@ -81,6 +79,8 @@ int main(int argc, char* argv[]){
             // } else {
             //     printf("Please enter a valid command.\n");
             // }
+            i++;
+            cmd = cmd[i];
         }
         free(cmd);
     }
