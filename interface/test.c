@@ -1,17 +1,8 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <ctype.h>
-#include <errno.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include "playlist.h"
+#include "interface.h"
 
 int main() {
 
+    /*
     //song function tests
     struct song * reflection = create_song("Reflection.mp3");  
     print_data(reflection);
@@ -60,6 +51,14 @@ int main() {
     disp_queue(master);
     clear_queue(master);
     disp_queue(master);
+    */
+
+    struct playlist ** master = setup();
+    
+    while (1) {
+        //get input
+        //run command
+    }
 
     return 0;
 }
