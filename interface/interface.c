@@ -124,7 +124,7 @@ int run_cmd(char ** cmd, struct, playlist ** master) {
         int s = get_song(cmd[1]);
         dequeue_song(((master[1])->list)[s], master);
     }
-    else if (!strcmp(cmd[0], "queue")) {
+    else if (!strcmp(cmd[0], "show_queue")) {
         disp_queue(master);
     }
     else if (!strcmp(cmd[0], "clear_queue")) {
