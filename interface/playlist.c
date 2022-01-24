@@ -160,7 +160,7 @@ void clear_queue(struct playlist ** master) {
 }
 
 //get song struct from song name
-int get_song(char * name, struct ** playlist master) {
+int get_song(char * name, struct playlist ** master) {
     struct song * s;
     int i;
     for (i = 0; i < MAX_SONG_NUM; i++) {
@@ -174,8 +174,8 @@ int get_song(char * name, struct ** playlist master) {
 }
 
 //get playlist struct from playlist name
-int get_playlist(char * name, struct ** playlist master) {
-    struct * playlist p;
+int get_playlist(char * name, struct playlist ** master) {
+    struct playlist * p;
     int i;
     for (i = 2; i < MAX_PLAYLIST_NUM + 2; i++) {
         if (master[i]) {

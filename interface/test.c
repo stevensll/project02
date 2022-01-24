@@ -55,17 +55,17 @@ int main() {
 
     //setup
     struct playlist ** master = setup();
-    disp_help_page();
+    //disp_help_page();
 
     int running = 1;
+    
     while (running) {
         
-        //get input
-
-        //run command
-        running = run_cmd(input);
+        //get input and run command
+        running = run_cmd(process_cmd(get_input()), master);
         
     }
+    
 
     return 0;
 }
