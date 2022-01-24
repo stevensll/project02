@@ -6,10 +6,10 @@
 
 #define SCREEN_WIDTH 1280 
 #define SCREEN_HEIGHT 720
+#define INPUT_SIZE 500
+int main(int argc, char* argv[]){
 
-int main(int argc, char** argv){
     Mix_Music * music = NULL;
-    int result = 0;
     if(SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO)==-1) {
         printf("SDL_Init: %s\n", SDL_GetError());
         return -1;
