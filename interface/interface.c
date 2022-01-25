@@ -69,7 +69,7 @@ int run_cmd(char ** cmd, struct playlist ** master) {
         if (s != -1) dequeue_song(((master[1])->list)[s], master);
         else printf("Not a valid song!\n\n");
     }
-    else if (!strcmp(cmd[0], "qplist")) {
+    else if (!strcmp(cmd[0], "qplist") && cmd[1]) {
         //find playlist struct p from cmd[1]
         int p = get_playlist(cmd[1], master);
         if (p != -1) queue_playlist(master[p], master);
@@ -120,36 +120,36 @@ int run_cmd(char ** cmd, struct playlist ** master) {
     else if (!strcmp(cmd[0], "disp_playlists")) {
         disp_all_playlists(master);
     }
-    else if (!strcmp(cmd[0], "song_info")) {
+    else if (!strcmp(cmd[0], "song_info") && cmd[1]) {
         //find song struct s from song name
         int s = get_song(cmd[1], master);
         if (s != -1) print_data(((master[1])->list)[s]);
     }
-    else if (!strcmp(cmd[0], "playlist_info")) {
+    else if (!strcmp(cmd[0], "playlist_info") && cmd[1]) {
         //find playlist struct p from name
         int p = get_playlist(cmd[1], master);
         if (p != -1) disp_playlist_data(master[p]);
     }
-    else if (!strcmp(cmd[0], "add_song")) {
+    else if (!strcmp(cmd[0], "add_song") && cmd[1] && cmd[2]) {
         //find playlist struct p from cmd[2]
         //find song struct s from cmd[1]
         int s = get_song(cmd[1], master);
         int p = get_playlist(cmd[2], master);
         if (s != -1 && p != -1) add_song(((master[1])->list)[s], master[p]);
     }
-    else if (!strcmp(cmd[0], "delete_song")) {
+    else if (!strcmp(cmd[0], "delete_song") && cmd[1] && cmd[2]) {
         //find playlist struct p from cmd[2]
         //find song struct s from cmd[1]
         int s = get_song(cmd[1], master);
         int p = get_playlist(cmd[2], master);
         if (s != -1 && p != -1) delete_song(((master[1])->list)[s], master[p]);
     }
-    else if (!strcmp(cmd[0], "delete_playlist")) {
+    else if (!strcmp(cmd[0], "delete_playlist") && cmd[1]) {
         //find playlist struct p from cmd[1]
         int p = get_playlist(cmd[1], master);
         if (p != -1) delete_playlist(master[p], master);
     }
-    else if (!strcmp(cmd[0], "create_playlist")) {
+    else if (!strcmp(cmd[0], "create_playlist") && cmd[1]) {
         struct playlist * p = create_playlist(cmd[1]);
         register_playlist(p, master);
     }
@@ -171,7 +171,7 @@ void disp_help_page() {
     stat("help.txt", &info);
     int size = info.st_size;
     char data[size];
-    int err= read(file, data, size-2);
+    int err= read(file, data, size-5);
     if (err == -1) {
         printf("Error reading help file: %s\n", strerror(errno));
     }
