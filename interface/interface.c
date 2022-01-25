@@ -1,20 +1,20 @@
 #include "interface.h"
-
+#include "playback.h"
 //setup function (sets up queue, master playlist)
+char PATH[200];
 struct playlist ** setup() {
 
-    printf("Welcome to SPotify!\n");
+    printf("Welcome to SPetify!\n");
 
     //create master
     struct playlist ** master = create_master_list();
 
     //ask for folder to pull
-    char path[200];
     printf("Enter folder to open ('.' for current directory): ");
-    scanf("%s", path);
+    scanf("%s", PATH);
 
     //get songs from folder
-    get_songs_from_dir(path, master);
+    get_songs_from_dir(PATH, master);
     disp_all_songs(master);
 
     printf("For list of commands, type 'help'. \n");
@@ -22,9 +22,9 @@ struct playlist ** setup() {
     return master;
 }
 
-//add mp3 miles in current directory to master playlist
-void get_songs_from_dir(char * path, struct playlist ** master) {
-    DIR * dir = opendir(path);
+//add mp3 files in current directory to master playlist
+void get_songs_from_dir(char * PATH, struct playlist ** master) {
+    DIR * dir = opendir(PATH);
     if (!dir) {
         printf("Error: %s\n", strerror(errno));
     } 
@@ -43,7 +43,7 @@ void get_songs_from_dir(char * path, struct playlist ** master) {
 
 //run command
 int run_cmd(char ** cmd, struct playlist ** master) {
-    printf("args[0]: %s| args[1]: %s| args[2]: %s|\n", cmd[0], cmd[1], cmd[2]);
+    // printf("args[0]: %s| args[1]: %s| args[2]: %s|\n", cmd[0], cmd[1], cmd[2]);
     if (!strcmp(cmd[0], "exit")) {
         return 0;
     }
@@ -104,32 +104,45 @@ int run_cmd(char ** cmd, struct playlist ** master) {
         int s = get_song(cmd[1], master);
         if (s != -1) change_genre(((master[1])->list)[s], cmd[2]);
     }
-    else if (!strcmp(cmd[0], "queue_list")) {
+    else if (!strcmp(cmd[0], "qlist")) {
         //find playlist struct p from cmd[1]
         int p = get_playlist(cmd[1], master);
         if (p != -1) queue_playlist(master[p], master);
     }
-    else if (!strcmp(cmd[0], "queue")) {
+    else if (!strcmp(cmd[0], "q") && cmd[1]) {
         //find song struct s from cmd[1]
         int s = get_song(cmd[1], master);
         if (s != -1) queue_song(((master[1])->list)[s], master);
     }
-    else if (!strcmp(cmd[0], "dequeue")) {
+    else if (!strcmp(cmd[0], "dq")&& cmd[1]) {
         //find song struct s from cmd[1]
         int s = get_song(cmd[1], master);
         if (s != -1) dequeue_song(((master[1])->list)[s], master);
     }
-    else if (!strcmp(cmd[0], "show_queue")) {
+    else if (!strcmp(cmd[0], "qshow")) {
         disp_queue(master);
     }
-    else if (!strcmp(cmd[0], "clear_queue")) {
+    else if (!strcmp(cmd[0], "qclear")) {
         clear_queue(master);
     }
-    else if (!strcmp(cmd[0], "play_queue")) {
-        //steven sdl magick
+    else if (!strcmp(cmd[0], "qplay")) {
+        printf("Now playing...\n");
+        disp_queue(master);
+        printf("\n");
+        printf("###########################################\n");
+        printf("########## ENTERING MUSIC PLAYER ##########\n");
+        printf("###########################################\n");
+        while(master[0]->list[0]){
+            printf("%s\n", master[0]->list[0]->file_name);
+            play_song(strcat(PATH,"/"),master[0]->list[0]->file_name);
+            dequeue_song(master[0]->list[0], master);
+        }
+        printf("##########################################\n");
+        printf("########## EXITING MUSIC PLAYER ##########\n");
+        printf("##########################################\n");
     }
     else {
-        printf("Invalid Input. Please type 'help' for list of commands. Remember to separate your arguments with a '--'!\n");
+        printf("Invalid command/arguments. Please type 'help' for list of commands. Remember to separate your arguments with a '~'!\n");
     }
 
     return 1;
@@ -140,7 +153,7 @@ void disp_help_page() {
     //read help.txt
     int file = open("help.txt", O_RDONLY);
     if (file == -1) {
-        printf("Error: %s\n", strerror(errno));
+        printf("Error opening help file: %s\n", strerror(errno));
     }
     struct stat info;
     stat("help.txt", &info);
@@ -148,13 +161,12 @@ void disp_help_page() {
     char data[size];
     int err= read(file, data, size-2);
     if (err == -1) {
-        printf("Error: %s\n", strerror(errno));
+        printf("Error reading help file: %s\n", strerror(errno));
     }
     close(file);
     printf("\n--------------------------------------------------------------------\n\n");
     printf("%s", data);
     printf("\n\n--------------------------------------------------------------------\n\n");
-    //printf("Welcome to the Help page!\nHere are some relevant commands:\n\t- disp_songs\n\t- disp_playlists\n\t- song_info song_name\n\t- playlist_info playlist_name\n\t- create_playlist playlist_name\n\t- add_song song_name playlist_name\n\t- delete_song song_name playlist_name\n\t- delete_playlist playlist_name\n\t- song_artist song_name artist\n\t- song_genre song_name genre\n\t- song_pub_year song_name pub_year\n\t- queue_list playlist_name\n\t- queue song_name\n\t- dequeue song_name\n\t- play_queue\n\t- clear_queue\n\t- exit\n\t- queue\n");
 }
 
 char ** process_cmd(char * input){
@@ -168,7 +180,7 @@ char ** process_cmd(char * input){
     char * curr = input;
     int i = 0;
     while(curr){
-        line[i] = strsep(&curr, "-");
+        line[i] = strsep(&curr, "~");
         i++;
     }
     line[i] = '\0';
