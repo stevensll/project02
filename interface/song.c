@@ -10,7 +10,7 @@ struct song * create_song(char * file_name) {
     (s->name)[strlen(file_name) - 4] = '\0';
     struct stat info;
     stat(s->file_name, &info);
-    s->atime = info.st_atime;
+    // s->atime = info.st_atime;
     s->size = info.st_size;
     change_genre(s, "");
     change_artist(s, "");
@@ -26,17 +26,9 @@ void print_data(struct song *s) {
     if (s->genre) printf("\tGenre: %s\n", s->genre);
     if (s->pub_year) printf("\tPublication Year: %d\n", s->pub_year);
     printf("\tFile size: %d\n", s->size);
-    update_atime(s);
-    printf("\tTime of last access: %s\n", ctime(&s->atime));
+    // update_atime(s);
+    // printf("\tTime of last access: %s\n", ctime(&s->atime));
 }
-
-//converts file name to song name by cutting off the ".mp3"
-// char * file_name_to_name(char * file_name) {
-//     char name[STRING_SIZE];
-//     strncpy(name, file_name, strlen(file_name) - 4);
-//     char * namep = name;
-//     return namep;
-// }
 
 void change_name(struct song *s, char * name) {
     strncpy(s->name, name, STRING_SIZE);
@@ -55,8 +47,8 @@ void change_pub_year(struct song *s, int yr) {
 }
 
 //updates when the song was last accessed
-void update_atime(struct song *s) {
-    struct stat info;
-    stat(s->file_name, &info);
-    s->atime = info.st_atime;
-}
+// void update_atime(struct song *s) {
+//     struct stat info;
+//     stat(s->file_name, &info);
+//     s->atime = info.st_atime;
+// }
