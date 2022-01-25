@@ -107,7 +107,7 @@ int run_cmd(char ** cmd, struct playlist ** master) {
     else if (!strcmp(cmd[0], "song_pub_year")) {
         //find song struct s from cmd[1]
         int s = get_song(cmd[1], master);
-        if (s != -1) change_pub_year(((master[1])->list)[s], cmd[2]);
+        if (s != -1) change_pub_year(((master[1])->list)[s], atoi(cmd[2]));
     }
     else if (!strcmp(cmd[0], "qlist")) {
         //find playlist struct p from cmd[1]
