@@ -1,8 +1,8 @@
 Welcome to the Help Page!
 
 SPetify is a terminal-based music player, so it collects input through commands from the command line. 
-Each input must contain only a single command, with the arguments separated by a "~".
-This means that your playlist and song names should not contain a "~".
+Each input must contain only a single command, with the arguments separated by a "`".
+This means that your playlist and song names should not contain a "`".
 
 Here are the list of commands supported:
 
@@ -12,24 +12,24 @@ For Navigating the UI
 
 Manipulating the Queue
 - qshow : prints out the current songs in the queue
-- q~song_name : adds song to the current queue
-- dq~song_name : removes song to the current queue
-- qlist~playlist_name : adds the songs in the playlist to the current queue
+- q`song_name : adds song to the current queue
+- dq`song_name : removes song to the current queue
+- qplist`playlist_name : adds the songs in the playlist to the current queue
 
 Displaying Information
 - disp_songs : prints out all the current songs loaded
 - disp_playlists : prints out all the current playlists created
-- song_info~song_name : prints out info on the song
-- playlist_info~playlist_name : prints out the titles of the songs in the playlist
+- sinfo`song_name : prints out info on the song
+- playlist_info`playlist_name : prints out the titles of the songs in the playlist
 
 Changing Song Information
-- song_name-old_song_name-new_song_name : updates song name 
-- song_artist-song_name-artist : updates song artist
-- song_genre-song_name-genre : updates song genre
-- song_pub_year-song_name-pub_year : updates song publication year
+- sname`old_song_name`new_song_name : updates song name 
+- sartist`song_name`artist : updates song artist
+- sgenre`song_name`genre : updates song genre
+- spub`song_name`pub_year : updates song publication year (please enter an int)
 
 Manipulating Playlists
-- create_playlist~playlist_name : creates an empty playlist with the given name
-- delete_playlist~playlist_name : deletes the given playlist
-- add_song~song_name~playlist_name : adds song to the given playlist
-- delete_song~song_name~playlist_name : deletes song from the given playlist     
+- plist_create`playlist_name : creates an empty playlist with the given name
+- plist_del`playlist_name : deletes the given playlist
+- add_song`song_name~playlist_name : adds song to the given playlist
+- delete_song`song_name~playlist_name : deletes song from the given playlist     
