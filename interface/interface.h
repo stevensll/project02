@@ -9,9 +9,6 @@ void get_songs_from_dir(char * path, struct playlist ** master);
 
 char ** process_cmd(char * input);
 
-//ask for input from command line and return command
-char * get_input();
-
 //run command
 int run_cmd(char ** cmd, struct playlist ** master);
 

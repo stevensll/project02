@@ -1,8 +1,8 @@
 all: main.o cmd.o
-	gcc -o main main.o cmd.o `sdl2-config --cflags --libs` -lSDL2_mixer
+	gcc -o main main.o cmd.o 
 
 main.o: main.c cmd.c cmd.h
-	gcc -c main.c `sdl2-config --cflags --libs` -lSDL2_mixer
+	gcc -c main.c 
 
 cmd.o: cmd.c cmd.h
 	gcc -c cmd.c

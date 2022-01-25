@@ -37,7 +37,9 @@ void register_playlist(struct playlist * list, struct playlist ** master) {
             master[i] = list;
             break;
         }
+        //printf("%d", i);
     }
+    //disp_all_playlists(master);
 }
 
 //add song to master playlist
@@ -101,7 +103,7 @@ void disp_playlist_data(struct playlist * p) {
     int i;
     for (i = 0; i < MAX_SONG_NUM; i++) {
         if ((p->list)[i]) {
-            printf("\t%s\n", ((p->list)[i])->name);
+            printf("\t[%d] %s\n", i, ((p->list)[i])->name);
         }
     }
 }
@@ -160,30 +162,31 @@ void clear_queue(struct playlist ** master) {
 }
 
 //get song struct from song name
-int get_song(char * name, struct playlist ** master) {
-    struct song * s;
+int get_song(char * sname, struct playlist ** master) {
     int i;
     for (i = 0; i < MAX_SONG_NUM; i++) {
         if (((master[1])->list)[i]) {
-            if (!strcmp(((master[1])->list)[i]->name, name)) {
+            if (!strcmp((((master[1])->list)[i])->name, sname)) {
                 return i;
             }
         }
     }
+    printf("Could not find song.\n");
     return -1;
 }
 
 //get playlist struct from playlist name
-int get_playlist(char * name, struct playlist ** master) {
-    struct playlist * p;
+int get_playlist(char * pname, struct playlist ** master) {
     int i;
     for (i = 2; i < MAX_PLAYLIST_NUM + 2; i++) {
         if (master[i]) {
-            if (!strcmp(master[i]->name, name)) {
+            //printf("master[%d] exists", i);
+            if (!strcmp((master[i])->name, pname)) {
                 return i;
             }
         }
     }
+    printf("Could not find playlist.\n");
     return -1;
 }
 

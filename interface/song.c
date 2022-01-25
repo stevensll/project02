@@ -26,6 +26,7 @@ void print_data(struct song *s) {
     if (s->genre) printf("\tGenre: %s\n", s->genre);
     if (s->pub_year) printf("\tPublication Year: %d\n", s->pub_year);
     printf("\tFile size: %d\n", s->size);
+    update_atime(s);
     printf("\tTime of last access: %s\n", ctime(&s->atime));
 }
 

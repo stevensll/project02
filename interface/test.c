@@ -57,14 +57,29 @@ int main() {
     struct playlist ** master = setup();
     //disp_help_page();
 
+    //get song and get playlist tests
+    // disp_all_songs(master);
+    // struct playlist * test = create_playlist("test");
+    // register_playlist(test, master);
+    // int i = get_playlist("test", master);
+    // printf("%d", i);
+    // disp_playlist_data(master[i]);
+
+
+
     int running = 1;
-    
+    int start = 1;
+
     while (running) {
         
         //get input and run command
-        running = run_cmd(process_cmd(get_input()), master);
-        
+        char input[STRING_SIZE];
+        fgets(input, sizeof(input), stdin);
+        char ** cmds = process_cmd(input);
+        if (!start) running = run_cmd(cmds, master);
+        start = 0;
     }
+    
     
 
     return 0;
