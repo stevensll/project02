@@ -1,5 +1,6 @@
 #include "interface.h"
 #include "playback.h"
+#include "cmd.h"
 //setup function (sets up queue, master playlist)
 char PATH[200];
 struct playlist ** setup() {
@@ -43,14 +44,22 @@ void get_songs_from_dir(char * PATH, struct playlist ** master) {
 
 //run command
 int run_cmd(char ** cmd, struct playlist ** master) {
-    //NAVIGATING UI
+
+    /*#######################
+      #### Navigating UI ####
+      #######################
+    */
     if (!strcmp(cmd[0], "exit")) {
         return 0;
     }
     else if (!strcmp(cmd[0], "help")) {
         disp_help_page();
     }
-    //MANIPULATING THE QUEUE
+
+    /*############################
+      #### Manipulating Queue ####
+      ############################
+    */
     else if (!strcmp(cmd[0], "qshow")) {
         disp_queue(master);
     }
@@ -83,12 +92,23 @@ int run_cmd(char ** cmd, struct playlist ** master) {
         printf("###########################################\n");
         while(master[0]->list[0]){
             printf("%s\n", master[0]->list[0]->file_name);
-            play_song(strcat(PATH,"/"),master[0]->list[0]->file_name);
+            int k = play_song(strcat(PATH,"/"),master[0]->list[0]->file_name);
             dequeue_song(master[0]->list[0], master);
+            if(k < 0) break;
         }
         printf("##########################################\n");
         printf("########## EXITING MUSIC PLAYER ##########\n");
         printf("##########################################\n");
+    }
+
+    /*#######################
+      #### Song commands ####
+      #######################
+    */
+    else if (!strcmp(cmd[0], "sinfo") && cmd[1]) {
+        //find song struct s from song name
+        int s = get_song(cmd[1], master);
+        if (s != -1) print_data(((master[1])->list)[s]);
     }
     else if (!strcmp(cmd[0], "sname") && cmd[1] && cmd[2]) {
         //find song struct s from cmd[1]
@@ -114,17 +134,18 @@ int run_cmd(char ** cmd, struct playlist ** master) {
         if (s != -1) change_pub_year(((master[1])->list)[s], atoi(cmd[2]));
         else printf("Invalid song name!\n\n")
     }
+
+    /*##########################
+      #### Display commands ####
+      ##########################
+    */
     else if (!strcmp(cmd[0], "disp_songs")) {
         disp_all_songs(master);
     }
     else if (!strcmp(cmd[0], "disp_playlists")) {
         disp_all_playlists(master);
     }
-    else if (!strcmp(cmd[0], "song_info") && cmd[1]) {
-        //find song struct s from song name
-        int s = get_song(cmd[1], master);
-        if (s != -1) print_data(((master[1])->list)[s]);
-    }
+
     else if (!strcmp(cmd[0], "playlist_info") && cmd[1]) {
         //find playlist struct p from name
         int p = get_playlist(cmd[1], master);
@@ -179,24 +200,6 @@ void disp_help_page() {
     printf("\n--------------------------------------------------------------------\n\n");
     printf("%s", data);
     printf("\n\n--------------------------------------------------------------------\n\n");
-}
-
-char ** process_cmd(char * input){
-    //removes any newlines
-    char *temp;
-    if ((temp=strchr(input, '\n'))!=0) {
-        *temp ='\0';
-    }
-
-    char ** line = calloc(sizeof(input)/sizeof(char), sizeof(char *));
-    char * curr = input;
-    int i = 0;
-    while(curr){
-        line[i] = strsep(&curr, "~");
-        i++;
-    }
-    line[i] = '\0';
-    return line;
 }
 
 

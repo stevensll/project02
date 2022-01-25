@@ -7,8 +7,6 @@ struct playlist ** setup();
 //add mp3 miles in current directory to master playlist
 void get_songs_from_dir(char * path, struct playlist ** master);
 
-char ** process_cmd(char * input);
-
 //run command
 int run_cmd(char ** cmd, struct playlist ** master);
 

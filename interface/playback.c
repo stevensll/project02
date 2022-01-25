@@ -11,30 +11,12 @@
 #include <errno.h>
 #include <sys/stat.h>
 
-#include "playback.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
 
+#include "playback.h"
+#include "cmd.h"
 
-#define MAX_INPUT_SIZE 500
-
-char ** foo_cmd(char * input){
-    //removes any newlines
-    char *temp;
-    if ((temp=strchr(input, '\n'))!=0) {
-        *temp ='\0';
-    }
-
-    char ** line = calloc(sizeof(input)/sizeof(char), sizeof(char *));
-    char * curr = input;
-    int i = 0;
-    while(curr){
-        line[i] = strsep(&curr, "~");
-        i++;
-    }
-    line[i] = '\0';
-    return line;
-}
 int mixer_setup(){
     if(SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO)==-1) {
         printf("SDL_Init error: %s\n", SDL_GetError());
@@ -66,9 +48,18 @@ int play_song(char * PATH, char * song){
         char input[500];
         while(running){
             fgets(input, sizeof(input), stdin);
-            char ** cmds = foo_cmd(input);
+            char ** cmds = process_cmd(input);
+            if(!strcmp(cmds[0], "exit")){
+                printf("Exiting music player\n\n");
+                Mix_HaltMusic();
+                Mix_FreeMusic(music);
+                music = NULL;
+                Mix_Quit();
+                SDL_Quit();
+                return -1;
+            }
             //SKIP the song
-            if(!strcmp(cmds[0], "skip")){
+            else if(!strcmp(cmds[0], "skip")){
                 printf("Skipping song\n\n");
                 running = 0;
             }

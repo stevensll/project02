@@ -2,7 +2,7 @@ Welcome to the Help Page!
 
 SPetify is a terminal-based music player, so it collects input through commands from the command line. 
 Each input must contain only a single command, with the arguments separated by a "`".
-This means that your playlist and song names should not contain a "`".
+Please make sure that your playlist and song names do not contain a "`".
 
 Here are the list of commands supported:
 
@@ -19,11 +19,11 @@ Manipulating the Queue
 Displaying Information
 - disp_songs : prints out all the current songs loaded
 - disp_playlists : prints out all the current playlists created
-- sinfo`song_name : prints out info on the song
 - playlist_info`playlist_name : prints out the titles of the songs in the playlist
 
 Changing Song Information
-- sname`old_song_name`new_song_name : updates song name 
+- sinfo`song_name : prints out info on the song
+- sname`old_song_name`new_song_name : updates song name
 - sartist`song_name`artist : updates song artist
 - sgenre`song_name`genre : updates song genre
 - spub`song_name`pub_year : updates song publication year (please enter an int)
@@ -31,5 +31,5 @@ Changing Song Information
 Manipulating Playlists
 - plist_create`playlist_name : creates an empty playlist with the given name
 - plist_del`playlist_name : deletes the given playlist
-- add_song`song_name~playlist_name : adds song to the given playlist
-- delete_song`song_name~playlist_name : deletes song from the given playlist     
+- padd`song_name`playlist_name : adds song to the given playlist
+- pdelete`song_name`playlist_name : deletes song from the given playlist     
