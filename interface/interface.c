@@ -43,7 +43,7 @@ void get_songs_from_dir(char * path, struct playlist ** master) {
 
 //run command
 int run_cmd(char ** cmd, struct playlist ** master) {
-    printf("args[0]: %s| args[1]: %s| args[2]: %s|\n", cmd[0], cmd[1], cmd[2]);
+    //printf("args[0]: %s| args[1]: %s| args[2]: %s|\n", cmd[0], cmd[1], cmd[2]);
     if (!strcmp(cmd[0], "exit")) {
         return 0;
     }
@@ -103,6 +103,11 @@ int run_cmd(char ** cmd, struct playlist ** master) {
         //find song struct s from cmd[1]
         int s = get_song(cmd[1], master);
         if (s != -1) change_genre(((master[1])->list)[s], cmd[2]);
+    }
+    else if (!strcmp(cmd[0], "song_pub_year")) {
+        //find song struct s from cmd[1]
+        int s = get_song(cmd[1], master);
+        if (s != -1) change_pub_year(((master[1])->list)[s], cmd[2]);
     }
     else if (!strcmp(cmd[0], "queue_list")) {
         //find playlist struct p from cmd[1]

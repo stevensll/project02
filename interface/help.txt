@@ -8,7 +8,7 @@ Here are the list of commands supported:
 
 For Navigating the UI
 - exit : exits the program
-- help : prints out the this help page
+- help : prints out this help page
 
 Manipulating the Queue
 - show_queue : prints out the current songs in the queue
@@ -23,6 +23,7 @@ Displaying Information
 - playlist_info-playlist_name : prints out the titles of the songs in the playlist
 
 Changing Song Information
+- song_name-old_song_name-new_song_name : updates song name 
 - song_artist-song_name-artist : updates song artist
 - song_genre-song_name-genre : updates song genre
 - song_pub_year-song_name-pub_year : updates song publication year
