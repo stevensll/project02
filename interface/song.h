@@ -17,14 +17,12 @@ struct song {
     char genre[30]; //genre, ex. "pop"
     int pub_year; //year of publication, ex. "2018"
     int size; //size of the file in bytes, ex. "1000000"
-    time_t atime; //time of last access
+    // time_t atime; //time of last access
 };
 
 struct song * create_song(char *file_name); //creates a song and adds its name, file_size, and atime
 
 void print_data(struct song *s); //prints out all the data contained within the song struct
-
-//char * file_name_to_name(char * file_name); //converts file name to song name by cutting off the ".mp3"
 
 void change_name(struct song *s, char * name); 
 
@@ -34,6 +32,5 @@ void change_genre(struct song *s, char * genre);
 
 void change_pub_year(struct song *s, int yr); 
 
-void update_atime(struct song *s); //updates when the song was last accessed
+// void update_atime(struct song *s); //updates when the song was last accessed
 
-//delete song, use free
