@@ -99,7 +99,7 @@ void delete_song(struct song *s, struct playlist * p) {
 
 //display playlist data 
 void disp_playlist_data(struct playlist * p) {
-    printf("Songs in %s:\n", p->name);
+    printf("Songs in %s:\n\n", p->name);
     int i;
     for (i = 0; i < MAX_SONG_NUM; i++) {
         if ((p->list)[i]) {
@@ -110,7 +110,7 @@ void disp_playlist_data(struct playlist * p) {
 
 //display name of all playlists
 void disp_all_playlists(struct playlist ** master) {
-    printf("CURRENT PLAYLISTS:\n");
+    printf("CURRENT PLAYLISTS:\n\n");
     int i;
     for (i = 2; i < MAX_PLAYLIST_NUM + 2; i++) {
         if (master[i]) {
@@ -171,7 +171,7 @@ int get_song(char * sname, struct playlist ** master) {
             }
         }
     }
-    printf("Could not find song.\n");
+    printf("Could not find song.\n\n");
     return -1;
 }
 
@@ -186,7 +186,7 @@ int get_playlist(char * pname, struct playlist ** master) {
             }
         }
     }
-    printf("Could not find playlist.\n");
+    printf("Could not find playlist.\n\n");
     return -1;
 }
 

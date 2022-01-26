@@ -71,13 +71,11 @@ int run_cmd(char ** cmd, struct playlist ** master) {
         //find song struct s from cmd[1]
         int s = get_song(cmd[1], master);
         if (s != -1) queue_song(((master[1])->list)[s], master);
-        else printf("Not a valid song!\n\n");
     }
     else if (!strcmp(cmd[0], "dq")&& cmd[1]) {
         //find song struct s from cmd[1]
         int s = get_song(cmd[1], master);
         if (s != -1) dequeue_song(((master[1])->list)[s], master);
-        else printf("Not a valid song!\n\n");
     }
     else if (!strcmp(cmd[0], "qplist") && cmd[1]) {
         //find playlist struct p from cmd[1]
@@ -116,25 +114,21 @@ int run_cmd(char ** cmd, struct playlist ** master) {
         //find song struct s from cmd[1]
         int s = get_song(cmd[1], master);
         if (s != -1) change_name(((master[1])->list)[s], cmd[2]);
-        else printf("Invalid song name!\n\n");
     }
     else if (!strcmp(cmd[0], "sartist") && cmd[1] && cmd[2]) {
         //find song struct s from cmd[1]
         int s = get_song(cmd[1], master);
         if (s != -1) change_artist(((master[1])->list)[s], cmd[2]);
-        else printf("Invalid song name!\n\n");
     }
     else if (!strcmp(cmd[0], "sgenre") && cmd[1] && cmd[2]) {
         //find song struct s from cmd[1]
         int s = get_song(cmd[1], master);
         if (s != -1) change_genre(((master[1])->list)[s], cmd[2]);
-        else printf("Invalid song name!\n\n");
     }
     else if (!strcmp(cmd[0], "spub") && cmd[1] && cmd[2]) {
         //find song struct s from cmd[1]
         int s = get_song(cmd[1], master);
         if (s != -1) change_pub_year(((master[1])->list)[s], atoi(cmd[2]));
-        else printf("Invalid song name!\n\n");
     }
 
     /*##########################
