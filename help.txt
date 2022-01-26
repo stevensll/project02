@@ -1,4 +1,4 @@
-Welcome to the Help Page!
+Welcome to the Main Interface Help Page!
 
 SPetify is a terminal-based music player, so it collects input through commands from the command line. 
 Each input must contain only a single command, with the arguments separated by a "|".
@@ -38,5 +38,5 @@ Manipulating Playlists
 - prm|playlist_name : deletes the given playlist
 - sadd|song_name|playlist_name : adds song to the given playlist
 - srm|song_name|playlist_name : deletes song from the given playlist     
-- pshuffle|playlist_name : shuffles the given playlist                                
-                              
+- pshuffle|playlist_name : shuffles the given playlist                                    
+                            
