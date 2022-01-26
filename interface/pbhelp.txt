@@ -1,7 +1,7 @@
 Welcome to the Playback Help Page!
 
-As a reminder each input must contain only a single command, with the arguments separated by a "~".
-This means that your playlist and song names should not contain a "~".
+As a reminder each input must contain only a single command, with the arguments separated by a "|".
+This means that your playlist and song names should not contain a "|".
 
 Here are the list of commands supported:
 
@@ -13,5 +13,5 @@ Playback
 - pause : pauses the curent song
 - resume : resumes the current song
 - skip : skips the current song
-- setv~volume : sets the volume to the double volume. Please use a value between 0.0 and 1.0
+- setv|volume : sets the volume to the double volume. Please use a value between 0.0 and 1.0
 

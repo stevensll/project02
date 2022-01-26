@@ -1,5 +1,5 @@
 #include "cmd.h"
-#define DELIM "`"
+#define DELIM "|"
 char ** process_cmd(char * input){
     //removes any newlines
     char *temp;

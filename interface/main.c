@@ -1,5 +1,5 @@
 #include "interface.h"
-
+#include "cmd.h"
 int main() {
 
     /*
