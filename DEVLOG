@@ -1,0 +1,18 @@
+1/18/22 2:13 PM / Steven : added and began testing SDL2 library for windows.
+1/19/22 9:05 PM / Peter: created interface headers and implemented song structs. 
+1/20/22 12:43 AM / Peter: created playlist headers and setup functions for songs.
+1/20/22 11:45 AM / Steven: debugged SDL2 and makefile to compile via windows command prompt.
+1/21/22 11:41 AM / Steven: tested audio playback on SDL2. Tried compiling through WSL but failed.
+1/22/22 5:34 PM / Steven: created playback.c and figured out how to compile SDL2 via Linux.
+1/23/22 3:25 AM / Peter: finished playlist.c and updated interface.
+1/23/22 2:56 PM / Peter: finished queue functionality and tested queue commands.
+1/23/22 6:33 PM / Peter: added indexing to songs and playlists.
+1/23/22 8:43 PM / Steven: added playback commands to music player interface.
+1/24/22 11:19 AM / Peter: tested command parsing for main interface and displaying help file.
+1/25/22 3:45 AM / Steven: integrated playing audio to main interface through fork().
+1/25/22 3:46 AM / Peter: tested current input functions and refactored code.
+1/25/22 11:47 AM / Peter, Steven : updated README and documentation, tested current functions with song and queue, and reorgnized code again.
+1/25/22 12:00 PM / Peter: added more input functions to main interface.
+1/25/22 2:45 PM / Steven: added exit function to music player interface so user can return to main.
+1/25/22 10:47 PM / Steven: bugfixed and made interface cleaner through display.
+1/26/22 1
