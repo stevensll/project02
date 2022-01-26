@@ -27,6 +27,7 @@ After song(s) have been added to the queue, use `qplay` to play the songs. This 
 > ...
 
 >`sinfo|All Along The Watchtower`
+>
 > Info for All Along The Watchtower: 
 >> File name: All Along The Watchtower.mp3
 >> 
@@ -49,6 +50,7 @@ After song(s) have been added to the queue, use `qplay` to play the songs. This 
 >`qplay`
 >
 > ...
+> 
 > Now playing...
 > 
 > Playing Thunderstruck by Unknown. Genre: Unknown. Published year: 0.
