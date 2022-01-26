@@ -22,75 +22,57 @@ After song(s) have been added to the queue, use `qplay` to play the songs. This 
 ### Sample Usage
 
 > Welcome to SPetify!
-> Enter folder to open ('.' for current directory): `music`
-> Songs in Master List:
+> Enter folder to open ('.' for current directory):  `music`
+> 
+> ...
 
-        [0] Thunderstruck
-        [1] All Along The Watchtower
-        [2] Here Comes the Sun
-        [3] American Pie
-        [4] Wish You Were Here
-        [5] Don't Stop Me Now
-        [6] Even Flow
-        [7] Stairway To Heaven
-        [8] Paint It, Black
-        [9] Mr. Blue Sky
-        [10] Don't Stop Believin'
+>`sinfo|All Along The Watchtower`
+> Info for All Along The Watchtower: 
+>> File name: All Along The Watchtower.mp3
+>> 
+>> Artist: Unknown
+>> 
+>> Genre: Unknown
+>> 
+>> File size: 3860396
 
->`sinfo|All Along The Watchtower
-Info for All Along The Watchtower: 
-        File name: All Along The Watchtower.mp3
-        Artist: Unknown
-        Genre: Unknown
-        File size: 3860396
-sartist|All Along The Watchtower|Jimi Hendrix
-sgenre|All Along The Watchtower|Rock n' Roll
-spub|All Along The Wachtower|1968
-Could not find song.
+> `sartist|All Along The Watchtower|Jimi Hendrix`
+> 
+> `sgenre|All Along The Watchtower|Rock n' Roll`
+> 
+> `spub|All Along The Watchtower|1968`
+> 
+>`q|Thunderstruck`
+>
+>`q|All Along The Watchtower`
+>
+>`qplay`
+>
+> ...
+> Now playing...
+> 
+> Playing Thunderstruck by Unknown. Genre: Unknown. Published year: 0.
+> 
+> Please press enter when the current song is finished to advance to next song.
 
-spub|All Along The Watchtower|1968
-q|Thunderstruck
-q|All Along The Watchtower
-qplay
-Now playing...
-Songs in Queue:
+>`skip`
+>
+> SKIPPED
 
-        [0] Thunderstruck
-        [1] All Along The Watchtower
+>Playing All Along The Watchtower by Jimi Hendrix. Genre: Rock n' Roll. Published year: 1968.
+>
+>Please press enter when the current song is finished to advance to next song.
 
+>`setv|0.25`
+>
+> Setting volume to 0.250000
 
-############################################
-########## EXITING MAIN INTERFACE ##########
-############################################
+>`pause`
+>
+> PAUSED
 
-###########################################
-########## ENTERING MUSIC PLAYER ##########
-###########################################
-
-Playing Thunderstruck by Unknown. Genre: Unknown. Published year: 0.
-Please press enter when the current song is finished to advance to next song.
-
-skip
-SKIPPED
-
-Playing All Along The Watchtower by Jimi Hendrix. Genre: Rock n' Roll. Published year: 1968.
-Please press enter when the current song is finished to advance to next song.
-
-setv|0.25
-Setting volume to 0.250000
-
-pause
-PAUSED
-
-exit
-##########################################
-########## EXITING MUSIC PLAYER ##########
-##########################################
-
-#############################################
-########## ENTERING MAIN INTERFACE ##########
-#############################################
-
-exit
-
-
+>`exit`
+>
+> ...
+> 
+>`exit`
