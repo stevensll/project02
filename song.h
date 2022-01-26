@@ -20,7 +20,7 @@ struct song {
     // time_t atime; //time of last access
 };
 
-struct song * create_song(char *file_name); //creates a song and adds its name, file_size, and atime
+struct song * create_song(char *file_name, char * PATH); //creates a song and adds its name, file_size, and atime
 
 void print_data(struct song *s); //prints out all the data contained within the song struct
 

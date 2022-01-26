@@ -13,7 +13,11 @@ struct playlist ** setup() {
     //ask for folder to pull
     printf("Enter folder to open ('.' for current directory): ");
     scanf("%s", PATH);
-    
+
+    printf("#############################################\n");
+    printf("########## ENTERING MAIN INTERFACE ##########\n");
+    printf("#############################################\n\n");
+
     //get songs from folder
     get_songs_from_dir(PATH, master);
     strcat(PATH, "/");
@@ -35,7 +39,7 @@ void get_songs_from_dir(char * PATH, struct playlist ** master) {
     while (file) {
         stat(file->d_name, &info);
         if ((file->d_type == DT_REG) && (strstr(file->d_name, ".mp3"))) {
-            struct song * new_song = create_song(file->d_name);
+            struct song * new_song = create_song(file->d_name, PATH);
             register_song(new_song, master);
         }
         file = readdir(dir);
@@ -82,10 +86,20 @@ int run_cmd(char ** cmd, struct playlist ** master) {
         int p = get_playlist(cmd[1], master);
         if (p != -1) queue_playlist(master[p], master);
     }
+    else if (!strcmp(cmd[0], "qall")) {
+        queue_playlist(master[1], master);
+    }
+    else if (!strcmp(cmd[0], "qshuffle")) {
+        shuffle(master[0]);
+    }
     else if (!strcmp(cmd[0], "qplay")) {
         printf("Now playing...\n");
         disp_queue(master);
         printf("\n");
+        printf("############################################\n");
+        printf("########## EXITING MAIN INTERFACE ##########\n");
+        printf("############################################\n\n");
+
         printf("###########################################\n");
         printf("########## ENTERING MUSIC PLAYER ##########\n");
         printf("###########################################\n\n");
@@ -99,17 +113,37 @@ int run_cmd(char ** cmd, struct playlist ** master) {
         printf("##########################################\n");
         printf("########## EXITING MUSIC PLAYER ##########\n");
         printf("##########################################\n\n");
-    }
 
-    /*#######################
-      #### Song commands ####
-      #######################
+        printf("#############################################\n");
+        printf("########## ENTERING MAIN INTERFACE ##########\n");
+        printf("#############################################\n\n");
+    }
+    
+    /*#################################
+      #### Displaying Information ####
+      ###############################
     */
+    else if (!strcmp(cmd[0], "sshow")) {
+        disp_all_songs(master);
+    }
+    else if (!strcmp(cmd[0], "pshow")) {
+        disp_all_playlists(master);
+    }
     else if (!strcmp(cmd[0], "sinfo") && cmd[1]) {
         //find song struct s from song name
         int s = get_song(cmd[1], master);
         if (s != -1) print_data(((master[1])->list)[s]);
     }
+    else if (!strcmp(cmd[0], "pinfo") && cmd[1]) {
+        //find playlist struct p from name
+        int p = get_playlist(cmd[1], master);
+        if (p != -1) disp_playlist_data(master[p]);
+    }
+
+    /*###################################
+      #### Changing Song Information ####
+      ###################################
+    */
     else if (!strcmp(cmd[0], "sname") && cmd[1] && cmd[2]) {
         //find song struct s from cmd[1]
         int s = get_song(cmd[1], master);
@@ -131,47 +165,46 @@ int run_cmd(char ** cmd, struct playlist ** master) {
         if (s != -1) change_pub_year(((master[1])->list)[s], atoi(cmd[2]));
     }
 
-    /*##########################
-      #### Display commands ####
-      ##########################
+    /*#################################
+      #### Manipulating Playlists ####
+      ################################
     */
-    else if (!strcmp(cmd[0], "disp_songs")) {
-        disp_all_songs(master);
-    }
-    else if (!strcmp(cmd[0], "disp_playlists")) {
-        disp_all_playlists(master);
-    }
-
-    else if (!strcmp(cmd[0], "playlist_info") && cmd[1]) {
+    else if (!strcmp(cmd[0], "pname") && cmd[1] && cmd[2]) {
         //find playlist struct p from name
         int p = get_playlist(cmd[1], master);
-        if (p != -1) disp_playlist_data(master[p]);
+        if (p != -1) list_name(master[p], cmd[2]);
     }
-    else if (!strcmp(cmd[0], "add_song") && cmd[1] && cmd[2]) {
+    else if (!strcmp(cmd[0], "padd") && cmd[1]) {
+        struct playlist * p = create_playlist(cmd[1]);
+        register_playlist(p, master);
+    }
+    else if (!strcmp(cmd[0], "prm") && cmd[1]) {
+        //find playlist struct p from cmd[1]
+        int p = get_playlist(cmd[1], master);
+        if (p != -1) delete_playlist(master[p], master);
+    }
+    else if (!strcmp(cmd[0], "sadd") && cmd[1] && cmd[2]) {
         //find playlist struct p from cmd[2]
         //find song struct s from cmd[1]
         int s = get_song(cmd[1], master);
         int p = get_playlist(cmd[2], master);
         if (s != -1 && p != -1) add_song(((master[1])->list)[s], master[p]);
     }
-    else if (!strcmp(cmd[0], "delete_song") && cmd[1] && cmd[2]) {
+    else if (!strcmp(cmd[0], "srm") && cmd[1] && cmd[2]) {
         //find playlist struct p from cmd[2]
         //find song struct s from cmd[1]
         int s = get_song(cmd[1], master);
         int p = get_playlist(cmd[2], master);
         if (s != -1 && p != -1) delete_song(((master[1])->list)[s], master[p]);
     }
-    else if (!strcmp(cmd[0], "delete_playlist") && cmd[1]) {
+    else if (!strcmp(cmd[0], "pshuffle") && cmd[1]) {
         //find playlist struct p from cmd[1]
         int p = get_playlist(cmd[1], master);
-        if (p != -1) delete_playlist(master[p], master);
+        if (p != -1) shuffle(master[p]);
     }
-    else if (!strcmp(cmd[0], "create_playlist") && cmd[1]) {
-        struct playlist * p = create_playlist(cmd[1]);
-        register_playlist(p, master);
-    }
+
     else {
-        printf("Invalid command/arguments. Please type 'help' for list of commands. Remember to separate your arguments with a '~'!\n");
+        printf("Invalid command/arguments. Please type 'help' for list of commands. Remember to separate your arguments with a '|'!\n\n");
     }
 
     return 1;

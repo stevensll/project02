@@ -23,6 +23,9 @@ void register_playlist(struct playlist * list, struct playlist ** master);
 //add song to master playlist
 void register_song(struct song * s, struct playlist ** master);
 
+//change name of playlist
+void list_name(struct playlist * p, char * pname);
+
 //deletes playlist and removes from master playlist list
 void delete_playlist(struct playlist * list, struct playlist ** master);
 
@@ -31,6 +34,9 @@ void add_song(struct song * s, struct playlist * p);
 
 //delete songs from playlist
 void delete_song(struct song *s, struct playlist * p);
+
+//shuffles the songs in the playlist
+void shuffle(struct playlist * p);
 
 //display playlist data 
 void disp_playlist_data(struct playlist * p);
@@ -61,6 +67,7 @@ int get_song(char * sname, struct playlist ** master);
 
 //get index of playlist struct from playlist name
 int get_playlist(char * pname, struct playlist ** master);
+
 
 //sorting through list[1] to make new playlist based on diff data, ex: last played, file size, artist, song name
 

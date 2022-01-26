@@ -47,6 +47,10 @@ void register_song(struct song * s, struct playlist ** master) {
     add_song(s, master[1]);
 }
 
+void list_name(struct playlist * p, char * pname) {
+    strncpy(p->name, pname, STRING_SIZE);
+}
+
 //deletes playlist and removes from master playlist list
 void delete_playlist(struct playlist * list, struct playlist ** master) {
     int i;
@@ -97,6 +101,21 @@ void delete_song(struct song *s, struct playlist * p) {
     }
 }
 
+//shuffles the songs in the playlist
+void shuffle(struct playlist * p) {
+    srand(time(0));
+    int n = playlist_size(p);
+    if (n > 1) {
+        int i;
+        for (i = 0; i < n - 1; i++) {
+          int j = i + rand() / (RAND_MAX / (n - i) + 1);
+          struct song * temp = p->list[j];
+          p->list[j] = p->list[i];
+          p->list[i] = temp;
+        }
+    }
+}
+
 //display playlist data 
 void disp_playlist_data(struct playlist * p) {
     printf("Songs in %s:\n\n", p->name);
@@ -111,13 +130,14 @@ void disp_playlist_data(struct playlist * p) {
 
 //display name of all playlists
 void disp_all_playlists(struct playlist ** master) {
-    printf("CURRENT PLAYLISTS:\n\n");
+    printf("Current Playlists:\n\n");
     int i;
     for (i = 2; i < MAX_PLAYLIST_NUM + 2; i++) {
         if (master[i]) {
             printf("\t%s\n", master[i]->name);
         }
     }
+    printf("\n");
 }
 
 //display queue data

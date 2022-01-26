@@ -1,4 +1,6 @@
 
+# IGNORE THIS, THESE ARE JUST NOTES
+
 ### Instructions
 1) Clean install SDL and mingw
 2) Install SDL_mixer
