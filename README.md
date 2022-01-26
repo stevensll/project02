@@ -9,6 +9,7 @@ SPetify is a terminal based MP3 music player. It contains song and playlist orga
 
 ## IMPORTANT: Library Installation and Running 
 Our program is designed to be directly tested on a linux machine. Based on our testing, SSH'ing into a linux machine will not grant audio permissions. Please makes sure the following libraries are installed on linux before compiling. Use `sudo apt-get install libsdl2-dev` and `sudo apt-get install libsdl2-mixer-dev`.
+
 PLEASE DO NOT EXIT THE PROGRAM WITH CTRL-C OR CTRL-D. If you do so, please end the background process `main.out` using System Monitor. Please use `exit` to escape the program.
 
 ## Usage
