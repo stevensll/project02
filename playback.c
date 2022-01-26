@@ -31,7 +31,7 @@ int mixer_setup(){
 int play_song(char * PATH, char * song){
     int status, w;
     if(fork()==0){
-        printf("Playing %s\nPlease press enter when the current song is finished to advance to next song.\n\n", song);
+        printf("Please press enter when the current song is finished to advance to next song.\n\n");
         
         //SETUP the mixer and load the music via the proper path
         int setup = mixer_setup();
@@ -60,7 +60,6 @@ int play_song(char * PATH, char * song){
             
             //EXIT the music player and return to main menu
             if(!strcmp(cmds[0], "exit")){
-                printf("Exiting music player\n\n");
                 Mix_HaltMusic();
                 Mix_FreeMusic(music);
                 music = NULL;
@@ -70,21 +69,21 @@ int play_song(char * PATH, char * song){
             }
             //SKIP the song
             else if(!strcmp(cmds[0], "skip")){
-                printf("Skipping song\n\n");
+                printf("SKIPPED\n\n");
                 running = 0;
             }
             
             //PAUSE the song
             else if (!strcmp(cmds[0], "pause")){
                 pause = 1;
-                printf("Pausing song\n\n");
+                printf("PAUSED\n\n");
                 Mix_PauseMusic();
             }
             
             //RESUME the song
             else if(!strcmp(cmds[0], "resume")){
                 pause = 0;
-                printf("Resuming song\n\n");
+                printf("RESUMED\n\n");
                 Mix_ResumeMusic(); 
             
             //SET THE VOLUME of the song. In range of 0.0-1.0

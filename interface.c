@@ -19,7 +19,7 @@ struct playlist ** setup() {
     strcat(PATH, "/");
     disp_all_songs(master);
 
-    printf("For list of commands, type 'help'. \n");
+    printf("For list of commands, type 'help'. \n\n");
 
     return master;
 }
@@ -90,10 +90,10 @@ int run_cmd(char ** cmd, struct playlist ** master) {
         printf("########## ENTERING MUSIC PLAYER ##########\n");
         printf("###########################################\n\n");
         while(master[0]->list[0]){
-            // printf("%s\n", master[0]->list[0]->file_name);
-            int k = play_song(PATH,master[0]->list[0]->file_name);
-            dequeue_song(master[0]->list[0], master);
-            printf("K: %d", k);
+            struct song * song = master[0]->list[0];
+            printf("Playing %s by %s. %s, %d.\n", song->name, song->artist, song->genre, song->pub_year);
+            dequeue_song(song, master);
+            int k = play_song(PATH,song->file_name);
             if(k > 0) break;
         }
         printf("##########################################\n");

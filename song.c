@@ -12,8 +12,8 @@ struct song * create_song(char * file_name) {
     stat(s->file_name, &info);
     // s->atime = info.st_atime;
     s->size = info.st_size;
-    change_genre(s, "");
-    change_artist(s, "");
+    change_genre(s, "Unknown");
+    change_artist(s, "Unknown");
     change_pub_year(s, 0);
     return s;
 }

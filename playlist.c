@@ -106,6 +106,7 @@ void disp_playlist_data(struct playlist * p) {
             printf("\t[%d] %s\n", i, ((p->list)[i])->name);
         }
     }
+    printf("\n");
 }
 
 //display name of all playlists
