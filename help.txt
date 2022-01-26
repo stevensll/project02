@@ -38,4 +38,5 @@ Manipulating Playlists
 - prm|playlist_name : deletes the given playlist
 - sadd|song_name|playlist_name : adds song to the given playlist
 - srm|song_name|playlist_name : deletes song from the given playlist     
-- pshuffle|playlist_name : shuffles the given playlist
+- pshuffle|playlist_name : shuffles the given playlist                                
+                              

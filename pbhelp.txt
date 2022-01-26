@@ -6,10 +6,10 @@ This means that your playlist and song names should not contain a "|".
 Here are the list of commands supported:
 
 Navigating the UI:
-- exit : returns to the main interface
+- exit : returns to the main interface and removes the last song played from queue
 - pbhelp : displays this help page
 
-Playback
+Playback:
 - pause : pauses the curent song
 - resume : resumes the current song
 - skip : skips the current song

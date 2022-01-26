@@ -4,8 +4,8 @@
 //setup function (sets up queue, master playlist)
 struct playlist ** setup();
 
-//add mp3 miles in current directory to master playlist
-void get_songs_from_dir(char * path, struct playlist ** master);
+//add mp3 miles in current directory to master playlist. Returns 1 if path found -1 otherwise.
+int get_songs_from_dir(char * path, struct playlist ** master);
 
 //run command
 int run_cmd(char ** cmd, struct playlist ** master);

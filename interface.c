@@ -11,28 +11,32 @@ struct playlist ** setup() {
     struct playlist ** master = create_master_list();
 
     //ask for folder to pull
-    printf("Enter folder to open ('.' for current directory): ");
-    scanf("%s", PATH);
+    while(1){
+        printf("Enter folder to open ('.' for current directory): ");
+        scanf("%s", PATH);
+        //get songs from folder
+        if(get_songs_from_dir(PATH, master)==1){
+            break;
+        }
+    }
+    
+    strcat(PATH, "/");
 
-    printf("#############################################\n");
+    printf("\n#############################################\n");
     printf("########## ENTERING MAIN INTERFACE ##########\n");
     printf("#############################################\n\n");
-
-    //get songs from folder
-    get_songs_from_dir(PATH, master);
-    strcat(PATH, "/");
     disp_all_songs(master);
-
     printf("For list of commands, type 'help'. \n\n");
 
     return master;
 }
 
 //add mp3 files in current directory to master playlist
-void get_songs_from_dir(char * PATH, struct playlist ** master) {
+int get_songs_from_dir(char * PATH, struct playlist ** master) {
     DIR * dir = opendir(PATH);
     if (!dir) {
         printf("Error: %s\n", strerror(errno));
+        return -1;
     } 
     struct dirent *file = readdir(dir);
     struct stat info;
@@ -45,6 +49,7 @@ void get_songs_from_dir(char * PATH, struct playlist ** master) {
         file = readdir(dir);
     }
     closedir(dir);
+    return 1;
 }
 
 //run command
@@ -105,7 +110,7 @@ int run_cmd(char ** cmd, struct playlist ** master) {
         printf("###########################################\n\n");
         while(master[0]->list[0]){
             struct song * song = master[0]->list[0];
-            printf("Playing %s by %s. %s, %d.\n", song->name, song->artist, song->genre, song->pub_year);
+            printf("Playing %s by %s. Genre: %s. Published year: %d.\n", song->name, song->artist, song->genre, song->pub_year);
             dequeue_song(song, master);
             int k = play_song(PATH,song->file_name);
             if(k > 0) break;
@@ -221,14 +226,14 @@ void disp_help_page() {
     stat("help.txt", &info);
     int size = info.st_size;
     char data[size];
-    int err= read(file, data, size-5);
+    int err= read(file, data, size-6);
     if (err == -1) {
         printf("Error reading help file: %s\n", strerror(errno));
     }
     close(file);
     printf("\n--------------------------------------------------------------------\n\n");
     printf("%s", data);
-    printf("\n\n--------------------------------------------------------------------\n\n");
+    printf("\n--------------------------------------------------------------------\n\n");
 }
 
 
